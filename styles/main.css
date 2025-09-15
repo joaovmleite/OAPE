@@ -1,0 +1,92 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    color: #0056b3;
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.toolbar {
+    display: flex;
+    gap: 10px;
+}
+
+.toolbar button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.toolbar button:hover {
+    background-color: #0056b3;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#editor-container {
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+#editor {
+    min-height: 500px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Customização do Quill */
+.ql-toolbar {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.ql-container {
+    border: none;
+    font-size: 16px;
+}
+
+.ql-editor {
+    padding: 20px;
+}
+
+.ql-editor.ql-blank::before {
+    color: #999;
+    font-style: italic;
+}
+
+

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Configurações - OAPE</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #0056b3;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Configurações</h1>
+        
+        <div id="success-message" class="success-message"></div>
+        
+        <form id="settings-form">
+            <div class="form-group">
+                <label for="api-key">Chave API do Google Gemini:</label>
+                <input type="text" id="api-key" placeholder="Cole sua chave API aqui...">
+                <div class="help-text">
+                    Você pode obter sua chave API gratuita em: 
+                    <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button type="button" id="cancel-btn" class="btn-secondary">Cancelar</button>
+                <button type="submit" class="btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const form = document.getElementById('settings-form');
+            const apiKeyInput = document.getElementById('api-key');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const successMessage = document.getElementById('success-message');
+
+            // Carregar chave API existente
+            if (window.electronAPI) {
+                try {
+                    const existingApiKey = await window.electronAPI.getApiKey();
+                    if (existingApiKey) {
+                        apiKeyInput.value = existingApiKey;
+                    }
+                } catch (error) {
+                    console.error('Erro ao carregar chave API:', error);
+                }
+            }
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const apiKey = apiKeyInput.value.trim();
+                
+                if (!apiKey) {
+                    alert('Por favor, insira uma chave API válida.');
+                    return;
+                }
+
+                if (window.electronAPI) {
+                    window.electronAPI.saveApiKey(apiKey);
+                }
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                window.close();
+            });
+
+            // Escutar confirmação de salvamento
+            if (window.electronAPI) {
+                window.electronAPI.onApiKeySaved((message) => {
+                    successMessage.textContent = message;
+                    successMessage.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        window.close();
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
