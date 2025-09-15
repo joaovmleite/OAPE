@@ -2,6 +2,8 @@
 
 OAPE é um software de escrita desenvolvido com Electron que oferece um editor de texto rico (RichText) com assistência de inteligência artificial integrada, utilizando a API Gemini do Google.
 
+![OAPE Software](https://i.postimg.cc/RCgNk9VK/Captura-de-tela-de-2025-09-15-16-47-37.png)
+
 ## Características Principais
 
 - **Editor RichText Avançado**: Baseado no Quill.js, oferece formatação completa de texto incluindo:
