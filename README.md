@@ -48,14 +48,6 @@ OAPE é um software de escrita desenvolvido com Electron que oferece um editor d
    npm start
    ```
 
-### Para Usuários Finais
-
-1. Baixe o instalador apropriado para seu sistema operacional
-2. Execute o instalador
-3. Abra o OAPE
-4. Acesse "Configurações" para inserir sua chave API do Gemini
-5. Comece a escrever e use o botão "IA" para obter assistência
-
 ## Obtendo uma Chave API do Gemini
 
 1. Acesse [Google AI Studio](https://aistudio.google.com/app/apikey)
